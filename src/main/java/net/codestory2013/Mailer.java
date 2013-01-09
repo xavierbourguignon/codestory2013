@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 
 import java.util.Properties;
 
+import static java.lang.System.err;
 import static javax.mail.Message.RecipientType.TO;
 
 public class Mailer {
@@ -40,7 +41,7 @@ public class Mailer {
                     + "\nAgent version: " + request.getClientInfo().getAgentVersion());
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            err.println("Unable to send message");
         }
     }
 }
