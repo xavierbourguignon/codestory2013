@@ -38,7 +38,8 @@ public class Mailer {
                     + "\nResource URI : " + request.getResourceRef()
                     + "\nIP address   : " + request.getClientInfo().getAddress()
                     + "\nAgent name   : " + request.getClientInfo().getAgentName()
-                    + "\nAgent version: " + request.getClientInfo().getAgentVersion());
+                    + "\nAgent version: " + request.getClientInfo().getAgentVersion()
+                    + "\nRequest Body: " + request.getEntityAsText());
             Transport.send(message);
         } catch (MessagingException e) {
             err.println("Unable to send message");
