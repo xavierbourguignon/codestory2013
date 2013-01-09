@@ -13,6 +13,7 @@ public class CodeStoryRestlet extends Restlet {
     private final Mailer mailer;
     final static String QUESTION_2 = "Es tu abonne a la mailing list(OUI/NON)";
     final static String QUESTION_3 = "Es tu heureux de participer(OUI/NON)";
+    final static String QUESTION_4 = "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)";
 
     @Inject
     public CodeStoryRestlet(Mailer mailer) {
@@ -27,7 +28,7 @@ public class CodeStoryRestlet extends Restlet {
         String question = form.getValues("q");
         String answer = "xavierbourguignon@gmail.com";
 
-        if (QUESTION_2.equals(question) || QUESTION_3.equals(question)) {
+        if (QUESTION_2.equals(question) || QUESTION_3.equals(question) || QUESTION_4.equals(question)) {
             answer = "OUI";
         }
 

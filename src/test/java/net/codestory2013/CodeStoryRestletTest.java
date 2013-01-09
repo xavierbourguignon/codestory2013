@@ -26,7 +26,7 @@ public class CodeStoryRestletTest {
     CodeStoryRestlet restlet;
 
     @Test
-    public void shouldReplyByMail() {
+    public void shouldReplyByMailtoQuelle_est_ton_adresse_email() {
         Request request = prepareMockRequest("Quelle est ton adresse email");
         restlet.handle(request, response);
         verify(response).setEntity("xavierbourguignon@gmail.com", TEXT_PLAIN);
@@ -42,6 +42,13 @@ public class CodeStoryRestletTest {
     @Test
     public void shouldReplyByOUItoEs_tu_heureux_de_participer_OUI_NON() {
         Request request = prepareMockRequest("Es tu heureux de participer(OUI/NON)");
+        restlet.handle(request, response);
+        verify(response).setEntity("OUI", TEXT_PLAIN);
+    }
+
+    @Test
+    public void shouldReplyByOUItoEs_tu_pret_a_recevoir_une_enonce_au_format_markdown_par_http_post_OUI_NON() {
+        Request request = prepareMockRequest("Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)");
         restlet.handle(request, response);
         verify(response).setEntity("OUI", TEXT_PLAIN);
     }
