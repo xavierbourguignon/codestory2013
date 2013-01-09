@@ -53,6 +53,13 @@ public class CodeStoryRestletTest {
         verify(response).setEntity("OUI", TEXT_PLAIN);
     }
 
+    @Test
+    public void shouldReplyByNONtoEst_ce_que_tu_reponds_toujours_oui_OUI_NON() {
+        Request request = prepareMockRequest("Est ce que tu reponds toujours oui(OUI/NON)");
+        restlet.handle(request, response);
+        verify(response).setEntity("NON", TEXT_PLAIN);
+    }
+
     private static Request prepareMockRequest(String question) {
         Request request = mock(Request.class);
         Reference reference = mock(Reference.class);

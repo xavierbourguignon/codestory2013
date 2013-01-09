@@ -6,14 +6,26 @@ import org.restlet.Response;
 import org.restlet.Restlet;
 import org.restlet.data.Form;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.restlet.data.MediaType.TEXT_PLAIN;
 
 public class CodeStoryRestlet extends Restlet {
 
     private final Mailer mailer;
+
+    final static String QUESTION_1 = "Quelle est ton adresse email";
     final static String QUESTION_2 = "Es tu abonne a la mailing list(OUI/NON)";
     final static String QUESTION_3 = "Es tu heureux de participer(OUI/NON)";
     final static String QUESTION_4 = "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)";
+    final static String QUESTION_5 = "Est ce que tu reponds toujours oui(OUI/NON)";
+
+    final static Set<String> YES_QUESTIONS = new HashSet<String>() {{
+        add(QUESTION_2);
+        add(QUESTION_3);
+        add(QUESTION_4);
+    }};
 
     @Inject
     public CodeStoryRestlet(Mailer mailer) {
@@ -23,13 +35,12 @@ public class CodeStoryRestlet extends Restlet {
     @Override
     public void handle(Request request, Response response) {
         mailer.sendRequest(request);
-
         Form form = request.getResourceRef().getQueryAsForm();
         String question = form.getValues("q");
         String answer = "xavierbourguignon@gmail.com";
 
-        if (QUESTION_2.equals(question) || QUESTION_3.equals(question) || QUESTION_4.equals(question)) {
-            answer = "OUI";
+        if (!QUESTION_1.equals(question)) {
+            answer = YES_QUESTIONS.contains(question) ? "OUI" : "NON";
         }
 
         response.setEntity(answer, TEXT_PLAIN);
