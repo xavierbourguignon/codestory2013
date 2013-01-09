@@ -33,8 +33,15 @@ public class CodeStoryRestletTest {
     }
 
     @Test
-    public void shouldReplyByOUI() {
+    public void shouldReplyByOUItoEs_tu_abonne_a_la_mailing_list_OUI_NON() {
         Request request = prepareMockRequest("Es tu abonne a la mailing list(OUI/NON)");
+        restlet.handle(request, response);
+        verify(response).setEntity("OUI", TEXT_PLAIN);
+    }
+
+    @Test
+    public void shouldReplyByOUItoEs_tu_heureux_de_participer_OUI_NON() {
+        Request request = prepareMockRequest("Es tu heureux de participer(OUI/NON)");
         restlet.handle(request, response);
         verify(response).setEntity("OUI", TEXT_PLAIN);
     }
