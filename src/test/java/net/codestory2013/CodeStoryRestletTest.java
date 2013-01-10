@@ -54,6 +54,13 @@ public class CodeStoryRestletTest {
     }
 
     @Test
+    public void shouldReplyByOUItoAs_tu_bien_recu_le_premier_enonce_OUI_NON() {
+        Request request = prepareMockRequest("As tu bien recu le premier enonce(OUI/NON)");
+        restlet.handle(request, response);
+        verify(response).setEntity("OUI", TEXT_PLAIN);
+    }
+
+    @Test
     public void shouldReplyByNONtoEst_ce_que_tu_reponds_toujours_oui_OUI_NON() {
         Request request = prepareMockRequest("Est ce que tu reponds toujours oui(OUI/NON)");
         restlet.handle(request, response);

@@ -20,11 +20,13 @@ public class CodeStoryRestlet extends Restlet {
     final static String QUESTION_3 = "Es tu heureux de participer(OUI/NON)";
     final static String QUESTION_4 = "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)";
     final static String QUESTION_5 = "Est ce que tu reponds toujours oui(OUI/NON)";
+    final static String QUESTION_6 = "As tu bien recu le premier enonce(OUI/NON)";
 
     final static Set<String> YES_QUESTIONS = new HashSet<String>() {{
         add(QUESTION_2);
         add(QUESTION_3);
         add(QUESTION_4);
+        add(QUESTION_6);
     }};
 
     @Inject
