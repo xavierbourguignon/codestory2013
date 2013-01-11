@@ -1,19 +1,12 @@
 package net.codestory2013;
 
-import com.google.inject.Inject;
-import org.restlet.Request;
-import org.restlet.Response;
-import org.restlet.Restlet;
-import org.restlet.data.Form;
+import org.restlet.resource.Get;
+import org.restlet.resource.ServerResource;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.restlet.data.MediaType.TEXT_PLAIN;
-
-public class CodeStoryRestlet extends Restlet {
-
-    private final Mailer mailer;
+public class QuestionsResource extends ServerResource {
 
     final static String QUESTION_1 = "Quelle est ton adresse email";
     final static String QUESTION_2 = "Es tu abonne a la mailing list(OUI/NON)";
@@ -22,6 +15,7 @@ public class CodeStoryRestlet extends Restlet {
     final static String QUESTION_5 = "Est ce que tu reponds toujours oui(OUI/NON)";
     final static String QUESTION_6 = "As tu bien recu le premier enonce(OUI/NON)";
     final static String QUESTION_7 = "1 1";
+    final static String QUESTION_8 = "2 2";
 
     final static Set<String> YES_QUESTIONS = new HashSet<String>() {{
         add(QUESTION_2);
@@ -30,17 +24,10 @@ public class CodeStoryRestlet extends Restlet {
         add(QUESTION_6);
     }};
 
-    @Inject
-    public CodeStoryRestlet(Mailer mailer) {
-        this.mailer = mailer;
-    }
-
-    @Override
-    public void handle(Request request, Response response) {
-        mailer.sendRequest(request);
-        Form form = request.getResourceRef().getQueryAsForm();
-        String question = form.getValues("q");
+    @Get("txt")
+    public String answer() {
         String answer = "xavierbourguignon@gmail.com";
+        String question = getQueryValue("q");
 
         if (!QUESTION_1.equals(question)) {
             answer = YES_QUESTIONS.contains(question) ? "OUI" : "NON";
@@ -50,6 +37,10 @@ public class CodeStoryRestlet extends Restlet {
             answer = "2";
         }
 
-        response.setEntity(answer, TEXT_PLAIN);
+        if (QUESTION_8.equals(question)) {
+            answer = "4";
+        }
+
+        return answer;
     }
 }
