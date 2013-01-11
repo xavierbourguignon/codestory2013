@@ -67,6 +67,13 @@ public class CodeStoryRestletTest {
         verify(response).setEntity("NON", TEXT_PLAIN);
     }
 
+    @Test
+    public void shouldReply2to1plus1() {
+        Request request = prepareMockRequest("1 1");
+        restlet.handle(request, response);
+        verify(response).setEntity("2", TEXT_PLAIN);
+    }
+
     private static Request prepareMockRequest(String question) {
         Request request = mock(Request.class);
         Reference reference = mock(Reference.class);

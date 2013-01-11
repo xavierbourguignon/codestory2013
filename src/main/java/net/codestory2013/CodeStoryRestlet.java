@@ -21,6 +21,7 @@ public class CodeStoryRestlet extends Restlet {
     final static String QUESTION_4 = "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)";
     final static String QUESTION_5 = "Est ce que tu reponds toujours oui(OUI/NON)";
     final static String QUESTION_6 = "As tu bien recu le premier enonce(OUI/NON)";
+    final static String QUESTION_7 = "1 1";
 
     final static Set<String> YES_QUESTIONS = new HashSet<String>() {{
         add(QUESTION_2);
@@ -43,6 +44,10 @@ public class CodeStoryRestlet extends Restlet {
 
         if (!QUESTION_1.equals(question)) {
             answer = YES_QUESTIONS.contains(question) ? "OUI" : "NON";
+        }
+
+        if (QUESTION_7.equals(question)) {
+            answer = "2";
         }
 
         response.setEntity(answer, TEXT_PLAIN);
